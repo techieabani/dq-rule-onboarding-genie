@@ -1,0 +1,28 @@
+# Python-generated files
+__pycache__/
+*.py[ocd]
+*.pdb
+build/
+dist/
+wheels/
+*.egg-info
+*.egg
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+# ---- uv package manager ----
+# Ignore uv’s cache and environment folders
+.uv/
+# Keep lock file for reproducibility
+!uv.lock
+# ---- IDE/editor settings ----
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---- OS-specific files ----
+.DS_Store
+Thumbs.db

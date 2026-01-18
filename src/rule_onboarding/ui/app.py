@@ -2,9 +2,19 @@ import streamlit as st
 import uuid
 import requests
 
-st.set_page_config(page_title="DQ Rule Onboarding Bot", page_icon="🤖")
-st.title("Data Quality Rule Onboarding Assistant 🤖")
+# --- API URLs ---
+RULE_ONBOARDING_BACKEND_API_URL = "http://localhost:8083/onboard-rule"
 
+st.set_page_config(page_title="DQ Rule Onboarding Genie", page_icon="🤖")
+st.title("DQ Rule Onboarding Genie 🤖")
+
+if st.sidebar.button("Clear Conversation History"):
+    # Clear Streamlit's local state
+    st.session_state.messages = []
+    # Generate a NEW session_id so the backend treats it as a fresh start
+    st.session_state.adk_session_id = str(uuid.uuid4())
+    st.rerun()
+    
 # Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -18,7 +28,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-if prompt := st.chat_input("Ex: Onboard a mean check for 'revenue' in 'sales' table with baseline value 10 and threshold 100"):
+if prompt := st.chat_input("Ex: Onboard a mean check for column 'revenue' in 'sales' table with baseline source as CONFIG, baseline value 10 and threshold 100"):
     # Update UI with User Message
     st.session_state.messages.append({"role": "user", "content": prompt})
     
@@ -32,7 +42,7 @@ if prompt := st.chat_input("Ex: Onboard a mean check for 'revenue' in 'sales' ta
         
         try:
             # Use requests with stream=True to get streaming response
-            with requests.post("http://localhost:8085/onboard-rule", json={"message": prompt, "session_id": st.session_state.adk_session_id}, stream=True, timeout=60) as response:
+            with requests.post(RULE_ONBOARDING_BACKEND_API_URL, json={"message": prompt, "session_id": st.session_state.adk_session_id}, stream=True, timeout=60) as response:
                 if response.status_code == 200:
                     for chunk in response.iter_content(chunk_size=None, decode_unicode=True):
                         if chunk:
@@ -43,6 +53,17 @@ if prompt := st.chat_input("Ex: Onboard a mean check for 'revenue' in 'sales' ta
                     response_placeholder.markdown(full_response)
                     # Add assistant response to history
                     st.session_state.messages.append({"role": "assistant", "content": full_response})
+                    if "baseline value must be 1.0" in full_response:
+                        if st.session_state.messages and "Validation Error" in st.session_state.messages[-1]["content"]:
+                            st.warning("Would you like me to fix this for you?")
+                            if st.button("Update Baseline to 1.0 and Retry"):
+                                # We send a "hidden" corrective prompt to the same session
+                                correction_prompt = "Actually, please use 1.0 as the baseline value for that rule."
+                
+                                # We trigger a rerun with the new prompt
+                                # In a real app, you'd wrap the API call in a function to reuse it here
+                                st.session_state.messages.append({"role": "user", "content": correction_prompt})
+                            st.rerun()
                 else:
                     st.error(f"API Error: {response.status_code}")
         except requests.exceptions.RequestException as e:

@@ -1,58 +1,62 @@
-from google.adk.agents import Agent
+import json
+from google.adk.agents import BaseAgent
+from google.adk.events import Event
+from typing import AsyncGenerator
+from google.genai import types
+from src.rule_onboarding.utils.logger import setup_logger
 
-DQ_RULE_DETAILS_TO_JSON_PAYLOAD_EXAMPLES = """
-Example 1:
-Input: 
-  "rule_name": "avg_price_check",
-  "db_name": "customer",
-  "dataset_name": "sales",
-  "column_name": "price",
-  "rule_type": "MEAN",
-  "baseline_value": 10.0,
-  "threshold_value": 100.0
+class DQRuleGenerationCustomAgent(BaseAgent):
 
-Assistant:
-{
-  "rule_name": "avg_price_check",
-  "db_name": "customer",
-  "dataset_name": "sales",
-  "column_name": "price",
-  "rule_type": "MEAN",
-  "baseline_value": 10.0,
-  "threshold_value": 100.0
-}
+    def __init__(self):
+        super().__init__(
+            name="rule_generation_agent",
+        )
+        self._output_key = "configure_rule_request_payload"
+        self._logger = setup_logger("DQ_RULE_GENERATION_AGENT")
 
-Example 2:
+    async def run_async(self, context)-> AsyncGenerator[Event, None]:
+        # Retrieve the output from the Rule Validation Agent
+        validated_data = context.session.state.get("validated_rule_details", "")
 
-Input: 
+        # If it contains a validation error, output nothing and stop
+        if not validated_data or isinstance(validated_data, str):
+            # We yield nothing here. The pipeline effectively halts for the UI.
+           self._logger.warning("Generation skipped: No validated data found.")
+           return 
 
-"rule_name": "order_count_check",
-  "db_name": "customer",
-  "dataset_name": "orders",
-  "column_name": "RECORD_COUNT",
-  "rule_type": "RECORD_COUNT",
-  "baseline_value": 500.0,
-  "threshold_value": null
-  
-Assistant:
-{
-  "rule_name": "order_count_check",
-  "db_name": "customer",
-  "dataset_name": "orders",
-  "column_name": "RECORD_COUNT",
-  "rule_type": "RECORD_COUNT",
-  "baseline_value": 500.0,
-  "threshold_value": null
-}
+        # Convert validated data into the REST API JSON format
+        try:
+            self._logger.info(f"Generating final payload for: {validated_data.get('rule_name')}")
+            # If data is already a dict (passed by Custom Validation Agent), use it directly
+            # Otherwise, try to parse it if it's a string
+            validated_rule_data = validated_data if isinstance(validated_data, dict) else json.loads(validated_data)
+            
+            # Construct the final JSON payload based on your examples
+            final_json_payload = {
+                "rule_name": validated_rule_data.get("rule_name"),
+                "db_name": validated_rule_data.get("db_name"),
+                "dataset_name": validated_rule_data.get("dataset_name"),
+                "connectivity_id": validated_rule_data.get("connectivity_id"),
+                "attributes": validated_rule_data.get("attributes", [])
+            }
 
-"""
+            # Save the final JSON to state so the Deployment Agent can use it
+            context.session.state[self._output_key] = final_json_payload
+            self._logger.info(f"Final Payload Generated: {json.dumps(final_json_payload)}")
+            # Yield Success Event
+            yield Event(
+                author=self.name,
+                content=types.Content(role='assistant', parts=[types.Part(text="RULE_GENERATION_SUCCESS")])
+            )
 
-rule_generation_agent = Agent(
-    name="rule_generation_agent",
-    model="gemini-3-flash-preview",
-    instruction=f"""
-    You are a Data Quality Assistant.
-    Convert {{validated_rule_details}} into a strictly valid JSON payload, example: {DQ_RULE_DETAILS_TO_JSON_PAYLOAD_EXAMPLES} for the DQ REST API.
-    """,
-    output_key="configure_rule_json_payload"
-)
+        except Exception as e:
+            error_msg = f"GENERATION_ERROR: {str(e)}"
+            self._logger.error(error_msg)
+            yield Event(
+                author=self.name,
+                content=types.Content(role='assistant', parts=[types.Part(text=error_msg)])
+            )
+            return
+
+# Instantiate for use in orchestrator
+rule_generation_agent = DQRuleGenerationCustomAgent()

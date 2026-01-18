@@ -4,22 +4,29 @@ import asyncio
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
 from google.adk.runners import Runner
-from google.adk.sessions import InMemorySessionService
+from google.adk.sessions import DatabaseSessionService
 from google.genai import types
 from pydantic import BaseModel
-from src.rule_onboarding.core.dq_rule_onboarding_orchestrator import dq_rule_onboarding_orchestrator
+from src.rule_onboarding.core import dq_rule_onboarding_orchestrator
 import uvicorn
+from src.rule_onboarding.utils.logger import setup_logger
+
+#--- LOGGER SETUP ---
+logger = setup_logger("DQ_RULE_ONBOARDING_API_SERVER")
 
 # This looks for a .env file in the current directory or parents
 load_dotenv() 
 
-# Now the ADK can find the key
+# ADK can find the key
 api_key = os.getenv("GOOGLE_API_KEY")
 
 app = FastAPI()
 
-# Initialize Persistence: Persistent in-memory store (lives as long as the API is up)
-session_service = InMemorySessionService()
+# This will create a 'sessions.db' file in project root
+DB_URL = "sqlite:///sessions.db"
+
+# Initialize the persistent service
+session_service = DatabaseSessionService(db_url = DB_URL)
 
 class ChatRequest(BaseModel):
     message: str
@@ -27,9 +34,8 @@ class ChatRequest(BaseModel):
 
 async def dq_rule_onboarding_agent_streamer(user_message: str, session_id: str):
 
-    # 1. Check if session exists; if not, create it
+    # Check if session exists; if not, create it
     try:
-        # Some versions of ADK have a 'get_session' method
         await session_service.get_session(session_id)
     except Exception:
         # Create the session if it's missing
@@ -48,11 +54,17 @@ async def dq_rule_onboarding_agent_streamer(user_message: str, session_id: str):
     # Format message for ADK
     content = types.Content(role='user', parts=[types.Part(text=user_message)])
     
-    # Use run_async for real-time output
+    # The run_async is used for real-time output
     # The Runner fetches history for 'session_id' and appends the new message
     # The run_async is the core of the multi-turn memory logic
     async for event in runner.run_async(session_id = session_id, user_id="2323ad05035", new_message = content):
         
+        # Check for Validation Errors from RuleValidation Custom Agent
+        if event.author == "rule_validation_agent":
+            text_output = event.content.parts[0].text
+            if "VALIDATION_ERROR" in text_output:
+                yield text_output.replace("VALIDATION_ERROR: ", "❌ ")
+                return  # Stop the stream and the pipeline here
         # Handle Text Chunks
         # We only stream 'partial' text chunks or the final text
         # Only yield text if it belongs to the deployment agent.
@@ -63,22 +75,16 @@ async def dq_rule_onboarding_agent_streamer(user_message: str, session_id: str):
                         # In a streaming setup, yielding raw text is fine for st.write_stream
                         yield part.text
         
-        # API console for debugging/logging without showing the user.
-        else:
-            print(f"Skipping intermediate output from: {event.author}")
-
-        # 2. Optional: Log Tool Calls (Great for debugging)
+        # Tool Calls
         if event.get_function_calls():
-            print(f"DEBUG: Agent calling tools: {event.get_function_calls()}")
+            logger.info(f"Agent calling tools: {event.get_function_calls()}")
             
         await asyncio.sleep(0.01)
+        
 @app.post("/onboard-rule")
 async def onboard_rule(request: ChatRequest):
-    # result = await dq_rule_onboarding_orchestrator.run_async(request.message)
-    # return {"status": "success", "response": result.content.text}
-    # Using 'text/plain' works for simple HTTP streaming. 
-    # For a browser-based frontend, 'text/event-stream' is more standard.
+    logger.info(f"Received onboarding request for session: {request.session_id}")
     return StreamingResponse(dq_rule_onboarding_agent_streamer(request.message, request.session_id), media_type="text/plain")
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8085)
+    uvicorn.run(app, host="127.0.0.1", port=8083)

@@ -1,9 +1,11 @@
 [project]
 name = "agentic-dq-rule-onboarding"
 version = "0.1.0"
-description = "Add your description here"
+description = "data quality rule onboarding genie using agentic framework"
 readme = "README.md"
 requires-python = ">=3.10"
+# This tells uv to treat the src directory as a package source
+packages = [{ include = "src" }]
 dependencies = [
     "fastapi>=0.128.0",
     "fastmcp>=2.14.2",

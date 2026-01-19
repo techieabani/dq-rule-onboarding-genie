@@ -130,3 +130,190 @@
 2026-01-18 21:38:20,841 | DQ_RULE_GENERATION_AGENT | INFO     | Final Payload Generated: {"rule_name": "CUSTOMER_SALES_STALE_COUNT_RULE", "db_name": "customer", "dataset_name": "sales", "connectivity_id": "1", "attributes": [{"column_name": "STALE", "rule_type": "STALE_COUNT", "baseline_source": "PREVIOUS", "rule_details": {"baseline_value": 1.0, "threshold_value": 100.0}}]}
 2026-01-18 21:38:20,858 | DQ_RULE_DEPLOYMENT_AGENT | INFO     | Deployment Agent retrieved payload: {'rule_name': 'CUSTOMER_SALES_STALE_COUNT_RULE', 'db_name': 'customer', 'dataset_name': 'sales', 'connectivity_id': '1', 'attributes': [{'column_name': 'STALE', 'rule_type': 'STALE_COUNT', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': 1.0, 'threshold_value': 100.0}}]}
 2026-01-18 21:38:20,960 | DQ_RULE_DEPLOYMENT_AGENT | INFO     | DEBUG: MCP Tool Result: meta=None content=[TextContent(type='text', text="6 validation errors for call[onboard_rule]\nrequest\n  Missing required argument [type=missing_argument, input_value={'rule_name': 'CUSTOMER_S...eshold_value': 100.0}}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing_argument\nrule_name\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value='CUSTOMER_SALES_STALE_COUNT_RULE', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/unexpected_keyword_argument\ndb_name\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value='customer', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/unexpected_keyword_argument\ndataset_name\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value='sales', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/unexpected_keyword_argument\nconnectivity_id\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value='1', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/unexpected_keyword_argument\nattributes\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=[{'column_name': 'STALE',...reshold_value': 100.0}}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.12/v/unexpected_keyword_argument", annotations=None, meta=None)] structuredContent=None isError=True
+2026-01-19 02:19:44,025 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | 
+ Shutting down DQ RULE ONBOARDING GENIE...
+2026-01-19 02:19:44,031 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | Shutdown complete.
+2026-01-20 00:14:14,816 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [MCP] Starting on port 8082...
+2026-01-20 00:14:16,846 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [API] Starting on port 8083...
+2026-01-20 00:14:19,750 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | 
+ DQ RULE ONBOARDING GENIE IS FULLY OPERATIONAL
+2026-01-20 00:14:19,750 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | Access the UI at: http://localhost:8084
+2026-01-20 00:14:19,927 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [UI] Starting on port 8084...
+2026-01-20 00:15:38,304 | DQ_RULE_ONBOARDING_API_SERVER | INFO     | Received onboarding request for session: ecc58a76-5813-4b9d-adfd-73adb8c6e0b4
+2026-01-20 00:19:45,009 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | 
+ Shutting down DQ RULE ONBOARDING GENIE...
+2026-01-20 00:19:45,010 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | Shutdown complete.
+2026-01-20 00:19:48,954 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [MCP] Starting on port 8082...
+2026-01-20 00:19:50,969 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [API] Starting on port 8083...
+2026-01-20 00:19:53,878 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | 
+ DQ RULE ONBOARDING GENIE IS FULLY OPERATIONAL
+2026-01-20 00:19:53,878 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | Access the UI at: http://localhost:8084
+2026-01-20 00:19:54,049 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [UI] Starting on port 8084...
+2026-01-20 00:20:04,947 | DQ_RULE_ONBOARDING_API_SERVER | INFO     | Received onboarding request for session: 591c0cee-692d-4501-855e-1479ffff0a23
+2026-01-20 00:20:05,148 | DQ_RULE_EXTRACTION_AGENT | INFO     |  rule_extraction_agent injected hardcoded JSON into state.
+2026-01-20 00:20:05,158 | DQ_RULE_VALIDATION_AGENT | INFO     | Received raw data for validation: {'rule_name': 'CUSTOMER_SALES_STALE_COUNT_RULE', 'db_name': 'customer', 'dataset_name': 'sales', 'repository_name': 'AWSRepo', 'attributes': [{'column_name': 'STALE', 'rule_type': 'STALE_COUNT', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': 1.0, 'threshold_value': 100.0}}]}
+2026-01-20 00:20:05,158 | DQ_RULE_VALIDATION_AGENT | INFO     | Parsed data: {'rule_name': 'CUSTOMER_SALES_STALE_COUNT_RULE', 'db_name': 'customer', 'dataset_name': 'sales', 'repository_name': 'AWSRepo', 'attributes': [{'column_name': 'STALE', 'rule_type': 'STALE_COUNT', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': 1.0, 'threshold_value': 100.0}}]}
+2026-01-20 00:20:05,158 | DQ_RULE_VALIDATION_AGENT | INFO     | Validating repository: AWSRepo
+2026-01-20 00:20:05,271 | DQ_RULE_ONBOARDING_MCP_SERVER | INFO     | Fetching connectivity for repo: AWSRepo
+2026-01-20 00:20:05,387 | DQ_RULE_ONBOARDING_MCP_SERVER | INFO     | Connectivity found: {'connectivity_id': '1'}
+2026-01-20 00:20:05,394 | DQ_RULE_VALIDATION_AGENT | INFO     | MCP Tool result: meta=None content=[TextContent(type='text', text='{"connectivity_id":"1"}', annotations=None, meta=None)] structuredContent={'connectivity_id': '1'} isError=False
+2026-01-20 00:20:05,395 | DQ_RULE_VALIDATION_AGENT | INFO     | Successfully mapped AWSRepo to 1
+2026-01-20 00:20:05,408 | DQ_RULE_GENERATION_AGENT | INFO     | Generating final payload for: CUSTOMER_SALES_STALE_COUNT_RULE
+2026-01-20 00:20:05,408 | DQ_RULE_GENERATION_AGENT | INFO     | Final Payload Generated: {"rule_name": "CUSTOMER_SALES_STALE_COUNT_RULE", "db_name": "customer", "dataset_name": "sales", "connectivity_id": "1", "attributes": [{"column_name": "STALE", "rule_type": "STALE_COUNT", "baseline_source": "PREVIOUS", "rule_details": {"baseline_value": 1.0, "threshold_value": 100.0}}]}
+2026-01-20 00:20:05,422 | DQ_RULE_DEPLOYMENT_AGENT | INFO     | Deployment Agent retrieved payload: {'rule_name': 'CUSTOMER_SALES_STALE_COUNT_RULE', 'db_name': 'customer', 'dataset_name': 'sales', 'connectivity_id': '1', 'attributes': [{'column_name': 'STALE', 'rule_type': 'STALE_COUNT', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': 1.0, 'threshold_value': 100.0}}]}
+2026-01-20 00:20:05,502 | DQ_RULE_DEPLOYMENT_AGENT | INFO     | DEBUG: MCP Tool Result: meta=None content=[TextContent(type='text', text="6 validation errors for call[onboard_rule]\nrequest\n  Missing required argument [type=missing_argument, input_value={'rule_name': 'CUSTOMER_S...eshold_value': 100.0}}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing_argument\nrule_name\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value='CUSTOMER_SALES_STALE_COUNT_RULE', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/unexpected_keyword_argument\ndb_name\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value='customer', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/unexpected_keyword_argument\ndataset_name\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value='sales', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/unexpected_keyword_argument\nconnectivity_id\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value='1', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/unexpected_keyword_argument\nattributes\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=[{'column_name': 'STALE',...reshold_value': 100.0}}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.12/v/unexpected_keyword_argument", annotations=None, meta=None)] structuredContent=None isError=True
+2026-01-20 00:57:30,600 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | 
+ Shutting down DQ RULE ONBOARDING GENIE...
+2026-01-20 00:57:30,606 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | Shutdown complete.
+2026-01-20 01:02:09,321 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [MCP] Starting on port 8082...
+2026-01-20 01:02:11,341 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [API] Starting on port 8083...
+2026-01-20 01:02:14,243 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | 
+ DQ RULE ONBOARDING GENIE IS FULLY OPERATIONAL
+2026-01-20 01:02:14,243 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | Access the UI at: http://localhost:8084
+2026-01-20 01:02:14,415 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [UI] Starting on port 8084...
+2026-01-20 01:02:55,164 | DQ_RULE_ONBOARDING_API_SERVER | INFO     | Received onboarding request for session: 2c3ce3b3-bd8f-4960-ba10-d690c2ba1034
+2026-01-20 01:02:55,381 | DQ_RULE_EXTRACTION_AGENT | INFO     |  rule_extraction_agent injected hardcoded JSON into state.
+2026-01-20 01:02:55,391 | DQ_RULE_VALIDATION_AGENT | INFO     | Received raw data for validation: {'rule_name': 'CUSTOMER_SALES_STALE_COUNT_RULE', 'db_name': 'customer', 'dataset_name': 'sales', 'repository_name': 'AWSRepo', 'attributes': [{'column_name': 'STALE', 'rule_type': 'STALE_COUNT', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': 1.0, 'threshold_value': 100.0}}]}
+2026-01-20 01:02:55,391 | DQ_RULE_VALIDATION_AGENT | INFO     | Parsed data: {'rule_name': 'CUSTOMER_SALES_STALE_COUNT_RULE', 'db_name': 'customer', 'dataset_name': 'sales', 'repository_name': 'AWSRepo', 'attributes': [{'column_name': 'STALE', 'rule_type': 'STALE_COUNT', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': 1.0, 'threshold_value': 100.0}}]}
+2026-01-20 01:02:55,391 | DQ_RULE_VALIDATION_AGENT | INFO     | Validating repository: AWSRepo
+2026-01-20 01:02:55,509 | DQ_RULE_ONBOARDING_MCP_SERVER | INFO     | Fetching connectivity for repo: AWSRepo
+2026-01-20 01:02:55,620 | DQ_RULE_ONBOARDING_MCP_SERVER | INFO     | Connectivity found: {'connectivity_id': '1'}
+2026-01-20 01:02:55,628 | DQ_RULE_VALIDATION_AGENT | INFO     | MCP Tool result: meta=None content=[TextContent(type='text', text='{"connectivity_id":"1"}', annotations=None, meta=None)] structuredContent={'connectivity_id': '1'} isError=False
+2026-01-20 01:02:55,629 | DQ_RULE_VALIDATION_AGENT | INFO     | Successfully mapped AWSRepo to 1
+2026-01-20 01:02:55,643 | DQ_RULE_GENERATION_AGENT | INFO     | Generating final payload for: CUSTOMER_SALES_STALE_COUNT_RULE
+2026-01-20 01:02:55,643 | DQ_RULE_GENERATION_AGENT | INFO     | Final Payload Generated: {"rule_name": "CUSTOMER_SALES_STALE_COUNT_RULE", "db_name": "customer", "dataset_name": "sales", "connectivity_id": "1", "attributes": [{"column_name": "STALE", "rule_type": "STALE_COUNT", "baseline_source": "PREVIOUS", "rule_details": {"baseline_value": 1.0, "threshold_value": 100.0}}]}
+2026-01-20 01:02:55,657 | DQ_RULE_DEPLOYMENT_AGENT | INFO     | Deployment Agent retrieved payload: {'rule_name': 'CUSTOMER_SALES_STALE_COUNT_RULE', 'db_name': 'customer', 'dataset_name': 'sales', 'connectivity_id': '1', 'attributes': [{'column_name': 'STALE', 'rule_type': 'STALE_COUNT', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': 1.0, 'threshold_value': 100.0}}]}
+2026-01-20 01:02:55,725 | DQ_RULE_DEPLOYMENT_AGENT | INFO     | DEBUG: MCP Tool Result: meta=None content=[TextContent(type='text', text="6 validation errors for call[onboard_rule]\nrequest\n  Missing required argument [type=missing_argument, input_value={'rule_name': 'CUSTOMER_S...eshold_value': 100.0}}]}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing_argument\nrule_name\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value='CUSTOMER_SALES_STALE_COUNT_RULE', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/unexpected_keyword_argument\ndb_name\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value='customer', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/unexpected_keyword_argument\ndataset_name\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value='sales', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/unexpected_keyword_argument\nconnectivity_id\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value='1', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/unexpected_keyword_argument\nattributes\n  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=[{'column_name': 'STALE',...reshold_value': 100.0}}], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.12/v/unexpected_keyword_argument", annotations=None, meta=None)] structuredContent=None isError=True
+2026-01-20 01:11:20,764 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | 
+ Shutting down DQ RULE ONBOARDING GENIE...
+2026-01-20 01:11:20,765 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | Shutdown complete.
+2026-01-20 01:11:25,092 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [MCP] Starting on port 8082...
+2026-01-20 01:11:27,112 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [API] Starting on port 8083...
+2026-01-20 01:11:30,009 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | 
+ DQ RULE ONBOARDING GENIE IS FULLY OPERATIONAL
+2026-01-20 01:11:30,010 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | Access the UI at: http://localhost:8084
+2026-01-20 01:11:30,144 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [UI] Starting on port 8084...
+2026-01-20 01:11:55,286 | DQ_RULE_ONBOARDING_API_SERVER | INFO     | Received onboarding request for session: d4fc8055-6fa4-49dd-a04d-dc651bab2b5f
+2026-01-20 01:11:55,480 | DQ_RULE_EXTRACTION_AGENT | INFO     |  rule_extraction_agent injected hardcoded JSON into state.
+2026-01-20 01:11:55,491 | DQ_RULE_VALIDATION_AGENT | INFO     | Received raw data for validation: {'rule_name': 'CUSTOMER_SALES_STALE_COUNT_RULE', 'db_name': 'customer', 'dataset_name': 'sales', 'repository_name': 'AWSRepo', 'attributes': [{'column_name': 'STALE', 'rule_type': 'STALE_COUNT', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': 1.0, 'threshold_value': 100.0}}]}
+2026-01-20 01:11:55,491 | DQ_RULE_VALIDATION_AGENT | INFO     | Parsed data: {'rule_name': 'CUSTOMER_SALES_STALE_COUNT_RULE', 'db_name': 'customer', 'dataset_name': 'sales', 'repository_name': 'AWSRepo', 'attributes': [{'column_name': 'STALE', 'rule_type': 'STALE_COUNT', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': 1.0, 'threshold_value': 100.0}}]}
+2026-01-20 01:11:55,492 | DQ_RULE_VALIDATION_AGENT | INFO     | Validating repository: AWSRepo
+2026-01-20 01:11:55,592 | DQ_RULE_ONBOARDING_MCP_SERVER | INFO     | Fetching connectivity for repo: AWSRepo
+2026-01-20 01:11:55,662 | DQ_RULE_ONBOARDING_MCP_SERVER | INFO     | Connectivity found: {'connectivity_id': '1'}
+2026-01-20 01:11:55,670 | DQ_RULE_VALIDATION_AGENT | INFO     | MCP Tool result: meta=None content=[TextContent(type='text', text='{"connectivity_id":"1"}', annotations=None, meta=None)] structuredContent={'connectivity_id': '1'} isError=False
+2026-01-20 01:11:55,670 | DQ_RULE_VALIDATION_AGENT | INFO     | Successfully mapped AWSRepo to 1
+2026-01-20 01:11:55,685 | DQ_RULE_GENERATION_AGENT | INFO     | Generating final payload for: CUSTOMER_SALES_STALE_COUNT_RULE
+2026-01-20 01:11:55,685 | DQ_RULE_GENERATION_AGENT | INFO     | Final Payload Generated: {"rule_name": "CUSTOMER_SALES_STALE_COUNT_RULE", "db_name": "customer", "dataset_name": "sales", "connectivity_id": "1", "attributes": [{"column_name": "STALE", "rule_type": "STALE_COUNT", "baseline_source": "PREVIOUS", "rule_details": {"baseline_value": 1.0, "threshold_value": 100.0}}]}
+2026-01-20 01:11:55,698 | DQ_RULE_DEPLOYMENT_AGENT | INFO     | Deployment Agent retrieved payload: {'rule_name': 'CUSTOMER_SALES_STALE_COUNT_RULE', 'db_name': 'customer', 'dataset_name': 'sales', 'connectivity_id': '1', 'attributes': [{'column_name': 'STALE', 'rule_type': 'STALE_COUNT', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': 1.0, 'threshold_value': 100.0}}]}
+2026-01-20 01:11:55,752 | DQ_RULE_ONBOARDING_MCP_SERVER | INFO     | Attempting to onboard rule: rule_name='CUSTOMER_SALES_STALE_COUNT_RULE' db_name='customer' dataset_name='sales' connectivity_id='1' attributes=[AttributeInfo(column_name='STALE', rule_type='STALE_COUNT', baseline_source='PREVIOUS', rule_details=AttributeRuleInfo(baseline_value=1.0, threshold_value=100.0))]
+2026-01-20 01:11:55,829 | DQ_RULE_ONBOARDING_MCP_SERVER | INFO     | Rule onboarded successfully: {'message': "Rule 'CUSTOMER_SALES_STALE_COUNT_RULE' is configured successfully"}
+2026-01-20 01:11:55,833 | DQ_RULE_DEPLOYMENT_AGENT | INFO     | DEBUG: MCP Tool Result: meta=None content=[TextContent(type='text', text="Rule 'CUSTOMER_SALES_STALE_COUNT_RULE' is configured successfully", annotations=None, meta=None)] structuredContent={'result': "Rule 'CUSTOMER_SALES_STALE_COUNT_RULE' is configured successfully"} isError=False
+2026-01-20 01:13:16,455 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | 
+ Shutting down DQ RULE ONBOARDING GENIE...
+2026-01-20 01:13:16,455 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | Shutdown complete.
+2026-01-20 01:13:23,493 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [MCP] Starting on port 8082...
+2026-01-20 01:13:25,517 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [API] Starting on port 8083...
+2026-01-20 01:13:28,412 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | 
+ DQ RULE ONBOARDING GENIE IS FULLY OPERATIONAL
+2026-01-20 01:13:28,412 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | Access the UI at: http://localhost:8084
+2026-01-20 01:13:28,545 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [UI] Starting on port 8084...
+2026-01-20 01:13:52,676 | DQ_RULE_ONBOARDING_API_SERVER | INFO     | Received onboarding request for session: fb516598-9e13-4cca-84ed-9ef5ffc43ac6
+2026-01-20 01:14:05,890 | DQ_RULE_VALIDATION_AGENT | INFO     | Received raw data for validation: ```json
+{
+  "rule_name": "DQ_DATABRICKS_EMPLOYEE_RULE",
+  "db_name": "Databricks",
+  "dataset_name": "Employee",
+  "repository_name": "DatabricksRepo",
+  "attributes": [
+    {
+      "column_name": "STALE_COUNT",
+      "rule_type": "STALE_COUNT",
+      "baseline_source": "PREVIOUS",
+      "rule_details": {
+        "baseline_value": 10,
+        "threshold_value": 100
+      }
+    },
+    {
+      "column_name": "salary",
+      "rule_type": "MEAN_VARIANCE",
+      "baseline_source": "PREVIOUS",
+      "rule_details": {
+        "baseline_value": 3,
+        "threshold_value": 80
+      }
+    },
+    {
+      "column_name": "salary",
+      "rule_type": "SUM",
+      "baseline_source": "CONFIG",
+      "rule_details": {
+        "baseline_value": 1,
+        "threshold_value": 100000
+      }
+    }
+  ]
+}
+```
+2026-01-20 01:14:05,891 | DQ_RULE_VALIDATION_AGENT | INFO     | Parsed data: {'rule_name': 'DQ_DATABRICKS_EMPLOYEE_RULE', 'db_name': 'Databricks', 'dataset_name': 'Employee', 'repository_name': 'DatabricksRepo', 'attributes': [{'column_name': 'STALE_COUNT', 'rule_type': 'STALE_COUNT', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': 10, 'threshold_value': 100}}, {'column_name': 'salary', 'rule_type': 'MEAN_VARIANCE', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': 3, 'threshold_value': 80}}, {'column_name': 'salary', 'rule_type': 'SUM', 'baseline_source': 'CONFIG', 'rule_details': {'baseline_value': 1, 'threshold_value': 100000}}]}
+2026-01-20 01:14:05,891 | DQ_RULE_VALIDATION_AGENT | INFO     | Validating repository: DatabricksRepo
+2026-01-20 01:14:05,935 | DQ_RULE_ONBOARDING_MCP_SERVER | INFO     | Fetching connectivity for repo: DatabricksRepo
+2026-01-20 01:14:05,989 | DQ_RULE_ONBOARDING_MCP_SERVER | INFO     | Connectivity found: {'connectivity_id': '2'}
+2026-01-20 01:14:05,995 | DQ_RULE_VALIDATION_AGENT | INFO     | MCP Tool result: meta=None content=[TextContent(type='text', text='{"connectivity_id":"2"}', annotations=None, meta=None)] structuredContent={'connectivity_id': '2'} isError=False
+2026-01-20 01:14:05,996 | DQ_RULE_VALIDATION_AGENT | INFO     | Successfully mapped DatabricksRepo to 2
+2026-01-20 01:14:05,996 | DQ_RULE_VALIDATION_AGENT | ERROR    | VALIDATION_ERROR: Rule STALE_COUNT with PREVIOUS baseline must have value 1.0.
+2026-01-20 01:14:45,642 | DQ_RULE_ONBOARDING_API_SERVER | INFO     | Received onboarding request for session: fb516598-9e13-4cca-84ed-9ef5ffc43ac6
+2026-01-20 01:16:49,971 | DQ_RULE_ONBOARDING_API_SERVER | INFO     | Received onboarding request for session: 58a2cd71-15dc-4e5c-a45e-40c9d5f42b0e
+2026-01-20 01:17:03,260 | DQ_RULE_VALIDATION_AGENT | INFO     | Received raw data for validation: {
+  "rule_name": "DQ_DATABRICKS_EMPLOYEE_RULE",
+  "db_name": "Databricks",
+  "dataset_name": "Employee",
+  "repository_name": "DatabricksRepo",
+  "attributes": [
+    {
+      "column_name": "STALE_COUNT",
+      "rule_type": "STALE_COUNT",
+      "baseline_source": "PREVIOUS",
+      "rule_details": {
+        "baseline_value": 1,
+        "threshold_value": 100
+      }
+    },
+    {
+      "column_name": "salary",
+      "rule_type": "MEAN_VARIANCE",
+      "baseline_source": "PREVIOUS",
+      "rule_details": {
+        "baseline_value": 3,
+        "threshold_value": 80
+      }
+    },
+    {
+      "column_name": "salary",
+      "rule_type": "SUM",
+      "baseline_source": "CONFIG",
+      "rule_details": {
+        "baseline_value": 1,
+        "threshold_value": 100000
+      }
+    }
+  ]
+}
+2026-01-20 01:17:03,261 | DQ_RULE_VALIDATION_AGENT | INFO     | Parsed data: {'rule_name': 'DQ_DATABRICKS_EMPLOYEE_RULE', 'db_name': 'Databricks', 'dataset_name': 'Employee', 'repository_name': 'DatabricksRepo', 'attributes': [{'column_name': 'STALE_COUNT', 'rule_type': 'STALE_COUNT', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': 1, 'threshold_value': 100}}, {'column_name': 'salary', 'rule_type': 'MEAN_VARIANCE', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': 3, 'threshold_value': 80}}, {'column_name': 'salary', 'rule_type': 'SUM', 'baseline_source': 'CONFIG', 'rule_details': {'baseline_value': 1, 'threshold_value': 100000}}]}
+2026-01-20 01:17:03,261 | DQ_RULE_VALIDATION_AGENT | INFO     | Validating repository: DatabricksRepo
+2026-01-20 01:17:03,315 | DQ_RULE_ONBOARDING_MCP_SERVER | INFO     | Fetching connectivity for repo: DatabricksRepo
+2026-01-20 01:17:03,333 | DQ_RULE_ONBOARDING_MCP_SERVER | INFO     | Connectivity found: {'connectivity_id': '2'}
+2026-01-20 01:17:03,341 | DQ_RULE_VALIDATION_AGENT | INFO     | MCP Tool result: meta=None content=[TextContent(type='text', text='{"connectivity_id":"2"}', annotations=None, meta=None)] structuredContent={'connectivity_id': '2'} isError=False
+2026-01-20 01:17:03,341 | DQ_RULE_VALIDATION_AGENT | INFO     | Successfully mapped DatabricksRepo to 2
+2026-01-20 01:17:03,357 | DQ_RULE_GENERATION_AGENT | INFO     | Generating final payload for: DQ_DATABRICKS_EMPLOYEE_RULE
+2026-01-20 01:17:03,357 | DQ_RULE_GENERATION_AGENT | INFO     | Final Payload Generated: {"rule_name": "DQ_DATABRICKS_EMPLOYEE_RULE", "db_name": "Databricks", "dataset_name": "Employee", "connectivity_id": "2", "attributes": [{"column_name": "STALE_COUNT", "rule_type": "STALE_COUNT", "baseline_source": "PREVIOUS", "rule_details": {"baseline_value": 1, "threshold_value": 100}}, {"column_name": "salary", "rule_type": "MEAN_VARIANCE", "baseline_source": "PREVIOUS", "rule_details": {"baseline_value": 3, "threshold_value": 80}}, {"column_name": "salary", "rule_type": "SUM", "baseline_source": "CONFIG", "rule_details": {"baseline_value": 1, "threshold_value": 100000}}]}
+2026-01-20 01:17:03,370 | DQ_RULE_DEPLOYMENT_AGENT | INFO     | Deployment Agent retrieved payload: {'rule_name': 'DQ_DATABRICKS_EMPLOYEE_RULE', 'db_name': 'Databricks', 'dataset_name': 'Employee', 'connectivity_id': '2', 'attributes': [{'column_name': 'STALE_COUNT', 'rule_type': 'STALE_COUNT', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': 1, 'threshold_value': 100}}, {'column_name': 'salary', 'rule_type': 'MEAN_VARIANCE', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': 3, 'threshold_value': 80}}, {'column_name': 'salary', 'rule_type': 'SUM', 'baseline_source': 'CONFIG', 'rule_details': {'baseline_value': 1, 'threshold_value': 100000}}]}
+2026-01-20 01:17:03,411 | DQ_RULE_ONBOARDING_MCP_SERVER | INFO     | Attempting to onboard rule: rule_name='DQ_DATABRICKS_EMPLOYEE_RULE' db_name='Databricks' dataset_name='Employee' connectivity_id='2' attributes=[AttributeInfo(column_name='STALE_COUNT', rule_type='STALE_COUNT', baseline_source='PREVIOUS', rule_details=AttributeRuleInfo(baseline_value=1.0, threshold_value=100.0)), AttributeInfo(column_name='salary', rule_type='MEAN_VARIANCE', baseline_source='PREVIOUS', rule_details=AttributeRuleInfo(baseline_value=3.0, threshold_value=80.0)), AttributeInfo(column_name='salary', rule_type='SUM', baseline_source='CONFIG', rule_details=AttributeRuleInfo(baseline_value=1.0, threshold_value=100000.0))]
+2026-01-20 01:17:03,434 | DQ_RULE_ONBOARDING_MCP_SERVER | INFO     | Rule onboarded successfully: {'message': "Rule 'DQ_DATABRICKS_EMPLOYEE_RULE' is configured successfully"}
+2026-01-20 01:17:03,439 | DQ_RULE_DEPLOYMENT_AGENT | INFO     | DEBUG: MCP Tool Result: meta=None content=[TextContent(type='text', text="Rule 'DQ_DATABRICKS_EMPLOYEE_RULE' is configured successfully", annotations=None, meta=None)] structuredContent={'result': "Rule 'DQ_DATABRICKS_EMPLOYEE_RULE' is configured successfully"} isError=False
+2026-01-20 01:19:36,404 | DQ_RULE_ONBOARDING_API_SERVER | INFO     | Received onboarding request for session: 58a2cd71-15dc-4e5c-a45e-40c9d5f42b0e
+2026-01-20 01:48:26,821 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | 
+ Shutting down DQ RULE ONBOARDING GENIE...
+2026-01-20 01:48:26,825 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | Shutdown complete.
+2026-01-20 01:48:31,161 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [MCP] Starting on port 8082...
+2026-01-20 01:48:33,171 | DQ_RULE_ONBOARDING_GENIE_LAUNCHER | INFO     | [API] Starting on port 8083...

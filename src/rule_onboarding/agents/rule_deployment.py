@@ -42,6 +42,12 @@ class DQRuleDeploymentCustomAgent(BaseAgent):
                 # Note: passing 'input=payload' and 'tool_context=context'
                 result = await tool.run_async(args=payload, tool_context=context) 
                 self._logger.info(f"DEBUG: MCP Tool Result: {result}")
+                # Check if the result returned an error from the MCP side
+                if getattr(result, "isError", False):
+                    # Extract the error text from the content array
+                    error_detail = result.content[0].text if result.content else "Unknown error"
+                    self._logger.error(f"MCP Validation Error: {error_detail}")
+                    raise RuntimeError("Data validation failed at MCP layer. Check logs for details.")
                 # 5. Success Logic
                 success_msg = f"✅ Success! Rule '{payload.get('rule_name')}' has been onboarded."
                 context.session.state[self._output_key] = success_msg

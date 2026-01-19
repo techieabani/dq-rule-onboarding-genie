@@ -36,14 +36,22 @@ async def dq_rule_onboarding_agent_streamer(user_message: str, session_id: str):
 
     # Check if session exists; if not, create it
     try:
-        await session_service.get_session(session_id)
+        session = await session_service.get_session(session_id=session_id)
     except Exception:
-        # Create the session if it's missing
-        await session_service.create_session(
-            app_name="dq_rule_onboarding_app",
-            user_id="2323ad05035",
-            session_id=session_id
-        )
+        # If get_session fails or session doesn't exist, ONLY THEN create it
+        session = None
+    if not session:
+        try:
+            await session_service.create_session(
+                app_name="dq_rule_onboarding_app",
+                user_id="2323ad05035",
+                session_id=session_id
+            )
+            logger.info(f"Created new session: {session_id}")
+        except Exception as e:
+            # Handle the case where it might have been created by a parallel request
+            logger.warning(f"Session creation skipped or failed: {e}")
+       
     # Initialize the Runner
     runner = Runner(
       agent = dq_rule_onboarding_orchestrator,

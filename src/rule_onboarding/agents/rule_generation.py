@@ -14,9 +14,15 @@ class DQRuleGenerationCustomAgent(BaseAgent):
         self._output_key = "configure_rule_request_payload"
         self._logger = setup_logger("DQ_RULE_GENERATION_AGENT")
 
-    async def run_async(self, context)-> AsyncGenerator[Event, None]:
+    async def _run_async_impl(self, context)-> AsyncGenerator[Event, None]:
+        
+        """
+        Overrides the ADK base implementation to transform validated data 
+        into the final REST API JSON structure.
+        """
+        state = context.session.state
         # Retrieve the output from the Rule Validation Agent
-        validated_data = context.session.state.get("validated_rule_details", "")
+        validated_data = state.get("validated_rule_details", "")
 
         # If it contains a validation error, output nothing and stop
         if not validated_data or isinstance(validated_data, str):
@@ -41,7 +47,7 @@ class DQRuleGenerationCustomAgent(BaseAgent):
             }
 
             # Save the final JSON to state so the Deployment Agent can use it
-            context.session.state[self._output_key] = final_json_payload
+            state[self._output_key] = final_json_payload
             self._logger.info(f"Final Payload Generated: {json.dumps(final_json_payload)}")
             # Yield Success Event
             yield Event(

@@ -43,12 +43,22 @@ class ConnectivityResponse(BaseModel):
 # -------------------------
 @mcp.tool()
 async def onboard_rule(
-    request: OnboardRuleRequest
+    rule_name: str,
+    db_name: str,
+    dataset_name: str,
+    connectivity_id: str,
+    attributes: list[AttributeInfo]
 ) -> str:
     """
     Deploy a data quality rule using the Rule Onboarding API.
     """
-
+    request = OnboardRuleRequest(
+        rule_name=rule_name,
+        db_name=db_name,
+        dataset_name=dataset_name,
+        connectivity_id=connectivity_id,
+        attributes=attributes
+    )
     logger.info(f"Attempting to onboard rule: {request}")
 
     async with httpx.AsyncClient() as client:

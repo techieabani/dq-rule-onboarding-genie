@@ -1,4 +1,4 @@
-#from .rule_extraction import rule_extraction_agent
+from .rule_extraction import rule_extraction_agent
 from .mock_rule_extraction import rule_extraction_agent
 from .rule_validation import rule_validation_agent
 from .rule_generation import rule_generation_agent

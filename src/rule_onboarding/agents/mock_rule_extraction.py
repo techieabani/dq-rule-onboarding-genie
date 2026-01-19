@@ -43,4 +43,4 @@ class HardcodedExtractionAgent(BaseAgent):
         )
 
 # Instantiate for use
-rule_extraction_agent = HardcodedExtractionAgent()
+mocked_rule_extraction_agent = HardcodedExtractionAgent()

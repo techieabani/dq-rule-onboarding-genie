@@ -64,6 +64,9 @@ if prompt := st.chat_input("Ex: Onboard a mean check for column 'revenue' in 'sa
                                 # In a real app, you'd wrap the API call in a function to reuse it here
                                 st.session_state.messages.append({"role": "user", "content": correction_prompt})
                             st.rerun()
+                elif response.status_code == 400 or response.status_code == 403:
+                    error_detail = response.json().get("detail", "Unknown error")
+                    st.error(f"{error_detail}")
                 else:
                     st.error(f"API Error: {response.status_code}")
         except requests.exceptions.RequestException as e:

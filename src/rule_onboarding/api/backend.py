@@ -1,4 +1,6 @@
 import os
+import re
+from fastapi import HTTPException
 from dotenv import load_dotenv
 import asyncio
 from fastapi import FastAPI
@@ -92,10 +94,52 @@ async def dq_rule_onboarding_agent_streamer(user_message: str, session_id: str):
             logger.info(f"Agent calling tools: {event.get_function_calls()}")
             
         await asyncio.sleep(0.01)
-        
+# --- THE GUARDRAIL ---
+def validate_input_guardrail(prompt: str):
+    """
+    Blocks off-topic or malicious queries before they hit the GPU.
+    """
+    p_lower = prompt.lower()
+    
+    # 1. Topic Restriction (DQ Domain Only)
+    # List keywords that MUST be present in some form for a valid DQ request
+    dq_keywords = ["rule", "check", "dq", "data quality","onboard", "mean", "average","sum","record","count","context","stale","schema","baseline", "null", "unique", "column", "table", "threshold", "dataset", "repo"]
+    if not any(word in p_lower for word in dq_keywords):
+        raise HTTPException(
+            status_code=400, 
+            detail="OFF_TOPIC: DQ Rule Onboarding Genie only handles Data Quality Rule onboarding requests."
+        )
+
+    # 2. Prompt Injection Protection
+    # Blocks attempts to hijack the model persona or leak instructions
+    injection_patterns = [
+        r"ignore (all )?previous instructions",
+        r"you are now a",
+        r"system prompt",
+        r"verbatim",
+        r"repeat the above",
+        r"delete all",
+        r"drop table" # Prevention of SQL-like injections if strings are used downstream
+    ]
+    for pattern in injection_patterns:
+        if re.search(pattern, p_lower):
+            raise HTTPException(
+                status_code=403, 
+                detail="SECURITY_VIOLATION: Malicious prompt pattern detected."
+            )
+    
+    # 3. Length Constraint (VRAM Safety for GTX 1650)
+    if len(prompt) > 500:
+         raise HTTPException(
+            status_code=400, 
+            detail="INPUT_TOO_LONG: Please keep rule descriptions under 500 characters."
+        )      
 @app.post("/onboard-rule")
 async def onboard_rule(request: ChatRequest):
     logger.info(f"Received onboarding request for session: {request.session_id}")
+    logger.info(f"User Message: {request.message}")
+    # Run guardrail first!
+    validate_input_guardrail(request.message)
     return StreamingResponse(dq_rule_onboarding_agent_streamer(request.message, request.session_id), media_type="text/plain")
 
 @app.get("/health/gpu")

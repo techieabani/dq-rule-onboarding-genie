@@ -243,7 +243,7 @@ You are a specialized Data Quality Extraction Assistant. Your goal is to convert
 }
 """
 
-rule_extraction_agent = Agent(
+rule_extraction_agent_gemini = Agent(
     name="rule_extraction_agent",
     model="gemini-3-flash-preview",
     instruction=f"{SYSTEM_INSTRUCTION}\n\n### Examples:\n{DQ_EXAMPLES}",

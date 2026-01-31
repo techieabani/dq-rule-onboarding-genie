@@ -32,6 +32,7 @@ class DQRuleValidationCustomAgent(BaseAgent):
             else:
                 data = raw_data
             self._logger.info(f"Parsed data: {data}")
+            
             # Repository Validation via MCP Tool
             repo_name = data.get("repository_name")
             self._logger.info(f"Validating repository: {repo_name}")
@@ -58,16 +59,40 @@ class DQRuleValidationCustomAgent(BaseAgent):
                 self._logger.info(f"MCP Tool result: {tool_result}")
            
                 # 3. Handle Errors (Check isError flag or 404 in content)
-                if getattr(tool_result, "isError", False) or "404" in str(tool_result):
+                # if getattr(tool_result, "isError", False) or "404" in str(tool_result):
+                #     msg = f"VALIDATION_ERROR: Repository '{repo_name}' was not found as part of existing configuration."
+                #     async for event in self._yield_error(ctx, msg):
+                #         yield event
+                #     return
+
+                # # 4. Extract connectivity_id from structuredContent (Pydantic mapped)
+                # conn_id = None
+                # if hasattr(tool_result, 'structuredContent') and tool_result.structuredContent:
+                #     conn_id = tool_result.structuredContent.get("connectivity_id")
+                # if not conn_id:
+                #     msg = f"VALIDATION_ERROR: Could not retrieve Connectivity ID missing for repository '{repo_name}'."
+                #     async for event in self._yield_error(ctx, msg):
+                #         yield event
+                #     return
+
+
+                # 3. Handle Errors (Dictionary style check)
+                # tool_result is a dict, so we check the key directly
+                if tool_result.get("isError", False) or "404" in str(tool_result):
                     msg = f"VALIDATION_ERROR: Repository '{repo_name}' was not found as part of existing configuration."
                     async for event in self._yield_error(ctx, msg):
                         yield event
                     return
 
-                # 4. Extract connectivity_id from structuredContent (Pydantic mapped)
+                # 4. Extract connectivity_id from structuredContent (Dictionary access)
                 conn_id = None
-                if hasattr(tool_result, 'structuredContent') and tool_result.structuredContent:
-                    conn_id = tool_result.structuredContent.get("connectivity_id")
+                structured_content = tool_result.get("structuredContent")
+
+                if structured_content:
+                    # Handle both string keys and potential internal objects
+                    conn_id = structured_content.get("connectivity_id")
+                    self._logger.info(f"Extracted connectivity_id: {conn_id} from structured_content: {structured_content}")
+
                 if not conn_id:
                     msg = f"VALIDATION_ERROR: Could not retrieve Connectivity ID missing for repository '{repo_name}'."
                     async for event in self._yield_error(ctx, msg):

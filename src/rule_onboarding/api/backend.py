@@ -10,7 +10,8 @@ from pydantic import BaseModel
 from src.rule_onboarding.core import dq_rule_onboarding_orchestrator
 import uvicorn
 from src.rule_onboarding.utils.logger import setup_logger
-
+from src.rule_onboarding.utils.gpu_monitor import get_gpu_status
+from src.rule_onboarding.finetune.wrapper import RuleExtractionModelWrapper
 #--- LOGGER SETUP ---
 logger = setup_logger("DQ_RULE_ONBOARDING_API_SERVER")
 
@@ -21,6 +22,9 @@ load_dotenv()
 api_key = os.getenv("GOOGLE_API_KEY")
 
 app = FastAPI()
+
+# Global variable to hold the model
+model_wrapper = None
 
 # This will create a 'sessions.db' file in project root
 DB_URL = "sqlite:///sessions.db"
@@ -94,5 +98,14 @@ async def onboard_rule(request: ChatRequest):
     logger.info(f"Received onboarding request for session: {request.session_id}")
     return StreamingResponse(dq_rule_onboarding_agent_streamer(request.message, request.session_id), media_type="text/plain")
 
+@app.get("/health/gpu")
+async def health_check():
+    status = get_gpu_status()
+    # Logic to warn if VRAM is going low
+    if status.get("free_mb", 1000) < 500:
+        status["status"] = "CRITICAL - Low VRAM"
+    else:
+        status["status"] = "HEALTHY"
+    return status
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8083)

@@ -126,13 +126,12 @@ def evaluate_rule_extraction_agent():
     df.to_csv("evaluation_report_1.csv", index=False)
     
     # The DQ Rule model is trained on
-    dq_labels = ["MEAN","RECORD_COUNT","SUM","NULL_COUNT","MEDIAN_VARIANCE","STALE_COUNT","STALE_CONTEXT","STD_DEV","MIN","MAX"]
+    dq_labels = ["MEAN","RECORD_COUNT","SUM","NULL_COUNT","MEDIAN_VARIANCE","STALE_COUNT","STALE_CONTEXT","STD_DEV","MIN","MAX","UNIQUE_COUNT"]
    
-    plot_dq_confusion_matrix(y_true_sample, y_pred_sample, dq_labels)
+    plot_dq_confusion_matrix(y_rule_type_expected, y_rule_type_predicted, dq_labels)
     
     # Print the full stats report too
     print("\nDetailed Classification Report:")
-    print(classification_report(y_true_sample, y_pred_sample, target_names=dq_labels))
-
+    print(classification_report(y_rule_type_expected, y_rule_type_predicted, target_names=dq_labels))
 if __name__ == "__main__":
     evaluate_rule_extraction_agent()

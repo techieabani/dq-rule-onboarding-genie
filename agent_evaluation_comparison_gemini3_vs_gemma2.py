@@ -189,6 +189,7 @@ async def run_evaluation():
         start = time.time()
         gemini_json = await get_gemini_response(eval_data['input'])
         gemini_lat = time.time() - start
+        logger.info(f"Gemini-3-Flash response: {gemini_json}")
         gem_type, gem_exact = calculate_metrics(gemini_json, eval_data['expected'])
         
         comparison_results.append({"Model": "Gemini-3-Flash", "Latency": gemini_lat, "Type_Match": gem_type, "Exact_Match": gem_exact})
@@ -201,6 +202,7 @@ async def run_evaluation():
                 rule_extraction_model_wrapper.generate, 
                 eval_data['input'])
         gemma_lat = time.time() - start
+        logger.info(f"Fine-tuned Gemma-2B response: {gemma_json}")
         gma_type, gma_exact = calculate_metrics(gemma_json, eval_data['expected'])
         
         comparison_results.append({"Model": "Fine-Tuned Gemma-2B", "Latency": gemma_lat, "Type_Match": gma_type, "Exact_Match": gma_exact})

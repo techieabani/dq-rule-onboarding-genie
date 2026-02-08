@@ -3200,3 +3200,84 @@ Map to JSON: Add a sum check on the total_sales column of the region_data table 
 model
 {"rule_name": "DQ_MARKETING_REGION_SUM_RULE", "db_name": "marketing", "dataset_name": "region_data", "repository_name": null, "attributes": [{"column_name": "total_sales", "rule_type": "SUM", "baseline_source": "CONFIG", "rule_details": {"baseline_value": null, "threshold_value": null}}]}
 
+2026-02-08 13:29:19,917 | RULE_EXTRACTION_AGENT_EVALUATION_COMPARISON_GEMINI3_VS_GEMMA2 | ERROR    | Failed to parse Gemini JSON: 'NoneType' object has no attribute 'replace'
+2026-02-08 13:29:19,918 | RULE_EXTRACTION_AGENT_EVALUATION_COMPARISON_GEMINI3_VS_GEMMA2 | INFO     | Gemini-3-Flash response: {}
+2026-02-08 13:41:12,559 | RULE_EXTRACTION_AGENT_EVALUATION_COMPARISON_GEMINI3_VS_GEMMA2 | INFO     | Gemini-3-Flash response: {'rule_name': 'DQ_SYSTEM_METADATA_STALE_CONTEXT_RULE', 'db_name': 'system', 'dataset_name': 'metadata', 'repository_name': 'SysRepo', 'attributes': [{'column_name': 'STALE_CONTEXT', 'rule_type': 'STALE_CONTEXT', 'baseline_source': 'CONFIG', 'rule_details': {'baseline_value': 1, 'threshold_value': None}}]}
+2026-02-08 13:41:49,599 | FINETUNE_WRAPPER     | INFO     | Initial VRAM Check: 161.0MB used of 4096.0MB
+2026-02-08 13:41:49,600 | FINETUNE_WRAPPER     | INFO     | ============================================================
+2026-02-08 13:41:49,600 | FINETUNE_WRAPPER     | INFO     | Loading Model...
+2026-02-08 13:41:49,600 | FINETUNE_WRAPPER     | INFO     | ============================================================
+2026-02-08 13:41:49,607 | FINETUNE_WRAPPER     | INFO     | ***GPU: NVIDIA GeForce GTX 1650 with Max-Q Design***
+2026-02-08 13:41:49,607 | FINETUNE_WRAPPER     | INFO     | ***PyTorch: 2.3.1+cu118***
+2026-02-08 13:41:49,608 | FINETUNE_WRAPPER     | INFO     | ***CUDA: 11.8***
+2026-02-08 13:41:49,608 | FINETUNE_WRAPPER     | INFO     | 
+Loading tokenizer...
+2026-02-08 13:41:52,642 | FINETUNE_WRAPPER     | INFO     | Loaded from adapter
+2026-02-08 13:41:52,642 | FINETUNE_WRAPPER     | INFO     | 
+ Loading base model: google/gemma-2-2b-it
+2026-02-08 13:41:52,642 | FINETUNE_WRAPPER     | INFO     |  Using 4-bit quantization...
+2026-02-08 13:41:52,645 | FINETUNE_WRAPPER     | INFO     | Testing GPU access...
+2026-02-08 13:41:52,645 | FINETUNE_WRAPPER     | INFO     | CUDA Available: True
+2026-02-08 13:42:13,794 | FINETUNE_WRAPPER     | INFO     | Success! GPU is receiving data.
+2026-02-08 13:42:13,797 | FINETUNE_WRAPPER     | INFO     | 
+ Loading LoRA adapter...
+2026-02-08 13:42:16,473 | FINETUNE_WRAPPER     | INFO     | 
+============================================================
+2026-02-08 13:42:16,473 | FINETUNE_WRAPPER     | INFO     | Model loaded successfully!
+2026-02-08 13:42:16,473 | FINETUNE_WRAPPER     | INFO     | GPU VRAM: 2.11 GB / 4.00 GB (52.8%)
+2026-02-08 13:42:16,474 | FINETUNE_WRAPPER     | INFO     | ============================================================
+2026-02-08 13:42:16,479 | FINETUNE_WRAPPER     | INFO     | Generating rule for instruction:
+Check the stale context for the metadata table in the system schema, repository SysRepo, baseline 1.
+
+2026-02-08 13:42:45,415 | FINETUNE_WRAPPER     | INFO     | Fine Tune Model generated output:
+user
+Map to JSON: Check the stale context for the metadata table in the system schema, repository SysRepo, baseline 1.
+model
+{"rule_name": "DQ_SYSTEM_METADATA_STALE_CONTEXT_RULE", "db_name": "system", "dataset_name": "metadata", "repository_name": "SysRepo", "attributes": [{"column_name": "STALE_CONTEXT", "rule_type": "STALE_CONTEXT", "baseline_source": "CONFIG", "rule_details": {"baseline_value": 1, "threshold_value": null}}]}
+
+2026-02-08 13:42:45,418 | RULE_EXTRACTION_AGENT_EVALUATION_COMPARISON_GEMINI3_VS_GEMMA2 | INFO     | Fine-tuned Gemma-2B response: {'rule_name': 'DQ_SYSTEM_METADATA_STALE_CONTEXT_RULE', 'db_name': 'system', 'dataset_name': 'metadata', 'repository_name': 'SysRepo', 'attributes': [{'column_name': 'STALE_CONTEXT', 'rule_type': 'STALE_CONTEXT', 'baseline_source': 'CONFIG', 'rule_details': {'baseline_value': 1, 'threshold_value': None}}]}
+2026-02-08 13:42:52,219 | RULE_EXTRACTION_AGENT_EVALUATION_COMPARISON_GEMINI3_VS_GEMMA2 | INFO     | Gemini-3-Flash response: {'rule_name': 'DQ_AWS_S3_TRACE_RECORD_COUNT_RULE', 'db_name': 'parquet', 'dataset_name': 's3://app-logs/errors/trace.parquet', 'repository_name': None, 'attributes': [{'column_name': 'RECORD_COUNT', 'rule_type': 'RECORD_COUNT', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': None, 'threshold_value': None}}]}
+2026-02-08 13:42:52,219 | FINETUNE_WRAPPER     | INFO     | Generating rule for instruction:
+Configure a record count rule for the s3://app-logs/errors/trace.parquet dataset, baseline source PREVIOUS.
+
+2026-02-08 13:43:20,609 | FINETUNE_WRAPPER     | INFO     | Fine Tune Model generated output:
+user
+Map to JSON: Configure a record count rule for the s3://app-logs/errors/trace.parquet dataset, baseline source PREVIOUS.
+model
+{"rule_name": "DQ_AWS_S3_TRACE_RECORD_COUNT_RULE", "db_name": "parquet", "dataset_name": "s3://app-logs/errors/trace.parquet", "repository_name": null, "attributes": [{"column_name": "RECORD_COUNT", "rule_type": "RECORD_COUNT", "baseline_source": "PREVIOUS", "rule_details": {"baseline_value": null, "threshold_value": null}}]}
+
+2026-02-08 13:43:20,609 | RULE_EXTRACTION_AGENT_EVALUATION_COMPARISON_GEMINI3_VS_GEMMA2 | INFO     | Fine-tuned Gemma-2B response: {'rule_name': 'DQ_AWS_S3_TRACE_RECORD_COUNT_RULE', 'db_name': 'parquet', 'dataset_name': 's3://app-logs/errors/trace.parquet', 'repository_name': None, 'attributes': [{'column_name': 'RECORD_COUNT', 'rule_type': 'RECORD_COUNT', 'baseline_source': 'PREVIOUS', 'rule_details': {'baseline_value': None, 'threshold_value': None}}]}
+2026-02-08 13:43:30,335 | RULE_EXTRACTION_AGENT_EVALUATION_COMPARISON_GEMINI3_VS_GEMMA2 | INFO     | Gemini-3-Flash response: {'rule_name': 'DQ_USERS_MEAN_RULE', 'db_name': None, 'dataset_name': 'users', 'repository_name': 'UserRepo', 'attributes': [{'column_name': 'age', 'rule_type': 'MEAN', 'baseline_source': 'CONFIG', 'rule_details': {'baseline_value': None, 'threshold_value': None}}]}
+2026-02-08 13:43:30,336 | FINETUNE_WRAPPER     | INFO     | Generating rule for instruction:
+Onboard a mean check on the age column for the users table using repository UserRepo.
+
+2026-02-08 13:43:53,511 | FINETUNE_WRAPPER     | INFO     | Fine Tune Model generated output:
+user
+Map to JSON: Onboard a mean check on the age column for the users table using repository UserRepo.
+model
+{"rule_name": "DQ_USERS_MEAN_RULE", "db_name": null, "dataset_name": "users", "repository_name": "UserRepo", "attributes": [{"column_name": "age", "rule_type": "MEAN", "baseline_source": "CONFIG", "rule_details": {"baseline_value": null, "threshold_value": null}}]}
+
+2026-02-08 13:43:53,512 | RULE_EXTRACTION_AGENT_EVALUATION_COMPARISON_GEMINI3_VS_GEMMA2 | INFO     | Fine-tuned Gemma-2B response: {'rule_name': 'DQ_USERS_MEAN_RULE', 'db_name': None, 'dataset_name': 'users', 'repository_name': 'UserRepo', 'attributes': [{'column_name': 'age', 'rule_type': 'MEAN', 'baseline_source': 'CONFIG', 'rule_details': {'baseline_value': None, 'threshold_value': None}}]}
+2026-02-08 13:44:00,833 | RULE_EXTRACTION_AGENT_EVALUATION_COMPARISON_GEMINI3_VS_GEMMA2 | INFO     | Gemini-3-Flash response: {'rule_name': 'DQ_SHIPPING_MEDIAN_VARIANCE_RULE', 'db_name': None, 'dataset_name': 'shipping', 'repository_name': None, 'attributes': [{'column_name': 'delivery_days', 'rule_type': 'MEDIAN_VARIANCE', 'baseline_source': 'CONFIG', 'rule_details': {'baseline_value': None, 'threshold_value': None}}]}
+2026-02-08 13:44:00,834 | FINETUNE_WRAPPER     | INFO     | Generating rule for instruction:
+Onboard a median variance check on the delivery_days column of the shipping table.
+
+2026-02-08 13:44:28,130 | FINETUNE_WRAPPER     | INFO     | Fine Tune Model generated output:
+user
+Map to JSON: Onboard a median variance check on the delivery_days column of the shipping table.
+model
+{"rule_name": "DQ_SHIPPING_DELIVERY_DAYS_MEDIAN_VARIANCE", "db_name": null, "dataset_name": "shipping", "repository_name": null, "attributes": [{"column_name": "delivery_days", "rule_type": "MEDIAN_VARIANCE", "baseline_source": "CONFIG", "rule_details": {"baseline_value": null, "threshold_value": null}}]}
+
+2026-02-08 13:44:28,131 | RULE_EXTRACTION_AGENT_EVALUATION_COMPARISON_GEMINI3_VS_GEMMA2 | INFO     | Fine-tuned Gemma-2B response: {'rule_name': 'DQ_SHIPPING_DELIVERY_DAYS_MEDIAN_VARIANCE', 'db_name': None, 'dataset_name': 'shipping', 'repository_name': None, 'attributes': [{'column_name': 'delivery_days', 'rule_type': 'MEDIAN_VARIANCE', 'baseline_source': 'CONFIG', 'rule_details': {'baseline_value': None, 'threshold_value': None}}]}
+2026-02-08 13:44:33,085 | RULE_EXTRACTION_AGENT_EVALUATION_COMPARISON_GEMINI3_VS_GEMMA2 | INFO     | Gemini-3-Flash response: {'rule_name': 'DQ_MARKETING_REGION_DATA_SUM_RULE', 'db_name': 'marketing', 'dataset_name': 'region_data', 'repository_name': None, 'attributes': [{'column_name': 'total_sales', 'rule_type': 'SUM', 'baseline_source': 'CONFIG', 'rule_details': {'baseline_value': None, 'threshold_value': None}}]}
+2026-02-08 13:44:33,086 | FINETUNE_WRAPPER     | INFO     | Generating rule for instruction:
+Add a sum check on the total_sales column of the region_data table in the marketing schema.
+
+2026-02-08 13:44:56,603 | FINETUNE_WRAPPER     | INFO     | Fine Tune Model generated output:
+user
+Map to JSON: Add a sum check on the total_sales column of the region_data table in the marketing schema.
+model
+{"rule_name": "DQ_MARKETING_REGION_SUM_RULE", "db_name": "marketing", "dataset_name": "region_data", "repository_name": null, "attributes": [{"column_name": "total_sales", "rule_type": "SUM", "baseline_source": "CONFIG", "rule_details": {"baseline_value": null, "threshold_value": null}}]}
+
+2026-02-08 13:44:56,603 | RULE_EXTRACTION_AGENT_EVALUATION_COMPARISON_GEMINI3_VS_GEMMA2 | INFO     | Fine-tuned Gemma-2B response: {'rule_name': 'DQ_MARKETING_REGION_SUM_RULE', 'db_name': 'marketing', 'dataset_name': 'region_data', 'repository_name': None, 'attributes': [{'column_name': 'total_sales', 'rule_type': 'SUM', 'baseline_source': 'CONFIG', 'rule_details': {'baseline_value': None, 'threshold_value': None}}]}
+2026-02-08 13:44:58,639 | RULE_EXTRACTION_AGENT_EVALUATION_COMPARISON_GEMINI3_VS_GEMMA2 | INFO     | Report generated: gemini_vs_gemma_accuracy_latency.png

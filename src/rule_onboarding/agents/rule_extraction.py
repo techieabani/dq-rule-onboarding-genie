@@ -10,8 +10,6 @@ logger = setup_logger("DQ_RULE_EXTRACTION_AGENT")
 # The directory where the Instruction for the rule extraction agent configuration file is stored
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
 CONFIG_PATH = PROJECT_ROOT / "config" / "rule_extraction_agent_config.yaml"
-#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#CONFIG_PATH = os.path.join(BASE_DIR, "config", "rule_extraction_agent_config.yaml")
 
 # Load the external configuration
 with open(CONFIG_PATH, "r") as f:

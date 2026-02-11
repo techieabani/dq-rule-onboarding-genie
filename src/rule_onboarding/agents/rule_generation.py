@@ -1,4 +1,5 @@
 import json
+import uuid
 from google.adk.agents import BaseAgent
 from google.adk.events import Event
 from typing import AsyncGenerator
@@ -36,6 +37,11 @@ class DQRuleGenerationCustomAgent(BaseAgent):
             # If data is already a dict (passed by Custom Validation Agent), use it directly
             # Otherwise, try to parse it if it's a string
             validated_rule_data = validated_data if isinstance(validated_data, dict) else json.loads(validated_data)
+            
+            #Generate a unique rule name
+            unique_rule_name = f"{validated_rule_data.get('rule_name')}_{uuid.uuid4().hex[:6].upper()}"
+            self._logger.info(f"Generated unique rule name: {unique_rule_name}")
+            validated_rule_data['rule_name'] = unique_rule_name
             
             # Construct the final JSON payload based on your examples
             final_json_payload = {

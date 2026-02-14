@@ -17,7 +17,7 @@ powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 # Once uv is installed, clone the repo, navigate to the project directory and initialize your environment:
 
 # Clone and enter the repo
-git clone <repository-url>
+git clone https://github.com/techieabani/dq-rule-onboarding-genie.git
 cd dq-rule-onboarding-genie
 
 # Create a virtual environment (.venv)

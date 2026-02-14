@@ -18,6 +18,7 @@ powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 
 # Clone and enter the repo
 git clone https://github.com/techieabani/dq-rule-onboarding-genie.git
+
 cd dq-rule-onboarding-genie
 
 # Create a virtual environment (.venv)

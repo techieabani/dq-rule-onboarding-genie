@@ -1,6 +1,7 @@
 from fastmcp import FastMCP
 from pydantic import BaseModel
 import httpx
+from typing import Optional
 from src.rule_onboarding.utils.logger import setup_logger
 from fastapi import HTTPException
 
@@ -19,8 +20,8 @@ CONNECTIVITY_API_BASE_URL = "http://127.0.0.1:8081/api/dq/config/v1/repositories
 # -------------------------
 
 class AttributeRuleInfo(BaseModel):
-    baseline_value: float
-    threshold_value: float
+    baseline_value: Optional[float] = None
+    threshold_value: Optional[float] = None
     
 class AttributeInfo(BaseModel):
     column_name: str

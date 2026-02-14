@@ -115,8 +115,7 @@ class DQRuleValidationCustomAgent(BaseAgent):
                 rule_type = attr.get("rule_type", "").upper()
                 baseline_source = attr.get("baseline_source", "").upper()
                 details = attr.get("rule_details", {})
-                baseline_val = float(details.get("baseline_value", 0))
-
+                baseline_val = float(details.get("baseline_value") or 0)
                 # Logic for STALE_COUNT / STALE_CONTEXT / RECORD_COUNT
                 if rule_type in ["STALE_COUNT", "STALE_CONTEXT","RECORD_COUNT"]:
                     if baseline_source == "PREVIOUS" and baseline_val != 1.0:
